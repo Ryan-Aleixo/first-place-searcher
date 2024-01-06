@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>osu #1 searcher</title>
+</head>
+<body>
+    <div class="container" id="inputs-container">
+        <div class="inputs-container">
+            <div class="black-box">
+                <div class="pp-group">
+                    <p class="pp-text">AR</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="ar-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="ar-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">OD</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="od-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="od-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">CS</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="cs-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="cs-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">SR</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="sr-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="sr-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>  
+                <div class="pp-group">
+                    <p class="pp-text">Playcount</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="pc-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="pc-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div> 
+                <button class="search-button" onclick="search()">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="inputs-container2">
+        <div class="inputs-container">
+            <div class="black-box">
+                <div class="pp-group">
+                    <p class="pp-text">Length</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="length-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="length-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">Combo</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="combo-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="combo-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">BPM</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="bpm-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="bpm-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">PP</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="pp-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="pp-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">Acc</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="acc-min" name="myTextBox" placeholder="Min">
+                        <input type="text" class="pp-input" id="acc-max" name="myTextBox2" placeholder="Max">
+                    </div>
+                </div>
+                    <div class="mods">
+                        <button class="mod-buttons" id="toggleHD" onclick="toggleHD()">HD</button>
+                        <button class="mod-buttons" id="toggleHR" onclick="toggleHR()">HR</button>
+                        <button class="mod-buttons" id="toggleDT" onclick="toggleDT()">DT</button>
+                        <button class="mod-buttons" id="toggleFL" onclick="toggleFL()">FL</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="result-container">
+    <div class="display-items">
+        <div class="pp-text" id="count"></div>
+        <div id="result">
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        let isHDToggled = false;
+        let isHRToggled = false;
+        let isDTToggled = false;
+        let isFLToggled = false;
+        let resultDiv = document.getElementById('result');
+        let resultCount = document.getElementById('count');
+        let data;
+
+        function toggleHD() {
+            isHDToggled = !isHDToggled;
+            updateButtonState('toggleHD', isHDToggled);
+        }
+
+        function toggleHR() {
+            isHRToggled = !isHRToggled;
+            updateButtonState('toggleHR', isHRToggled);
+        }
+
+        function toggleDT() {
+            isDTToggled = !isDTToggled;
+            updateButtonState('toggleDT', isDTToggled);
+        }
+
+        function toggleFL() {
+            isFLToggled = !isFLToggled;
+            updateButtonState('toggleFL', isFLToggled);
+        }
+
+        function updateButtonState(buttonId, isToggled) {
+            const button = document.getElementById(buttonId);
+
+            if (isToggled) {
+                button.classList.add('orange-bg');
+            } else {
+                button.classList.remove('orange-bg');
+            }
+        }
+        
+        function getFromInputs() {
+            const ppMin = document.getElementById('pp-min').value;
+            const ppMax = document.getElementById('pp-max').value;
+
+            const arMin = document.getElementById('ar-min').value;
+            const arMax = document.getElementById('ar-max').value;
+
+            const odMin = document.getElementById('od-min').value;
+            const odMax = document.getElementById('od-max').value;
+
+            const csMin = document.getElementById('cs-min').value;
+            const csMax = document.getElementById('cs-max').value;
+
+            const srMin = document.getElementById('sr-min').value;
+            const srMax = document.getElementById('sr-max').value;
+
+            const lengthMin = document.getElementById('length-min').value;
+            const lengthMax = document.getElementById('length-max').value;
+
+            const comboMin = document.getElementById('combo-min').value;
+            const comboMax = document.getElementById('combo-max').value;
+
+            const bpmMin = document.getElementById('bpm-min').value;
+            const bpmMax = document.getElementById('bpm-max').value;
+
+            const accMin = document.getElementById('acc-min').value;
+            const accMax = document.getElementById('acc-max').value;
+
+            const pcMin = document.getElementById('pc-min').value;
+            const pcMax = document.getElementById('pc-max').value;
+
+            const inputList = [ppMin, ppMax, arMin, arMax, odMin, odMax, csMin, csMax, srMin, srMax, 
+            lengthMin, lengthMax, comboMin, comboMax, isHDToggled, isHRToggled, isDTToggled, isFLToggled,
+            bpmMin, bpmMax, accMin, accMax, pcMin, pcMax];
+            return inputList;
+        }
+
+        function search() {
+            const xhr = new XMLHttpRequest();
+            const inputListJSON = JSON.stringify(getFromInputs());
+
+            xhr.open('GET', `/get_data?inputList=${encodeURIComponent(inputListJSON)}`, true);
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    resultDiv = document.getElementById('result');
+                    
+                    resultDiv.innerHTML = "";
+                    resultCount.innerHTML = "";
+
+                    data = JSON.parse(xhr.responseText);
+                    if (data.length === 0) {
+                        resultDiv.innerHTML = "Your search didn't return anything"
+                    } else {
+                        resultCount.innerText = "Results: " + data[0].count;
+                        const firstItems = data.slice(0, 5);
+                        data.splice(0, 5);
+                        firstItems.forEach(item => {
+                            addHTML(item);
+                    });
+                    }
+                }
+            };
+            xhr.send();
+        }
+        let items;
+        function loadData(){
+            resultDiv = document.getElementById('result');
+            items = data.slice(0, 5);
+            data.splice(0, 5);
+            items.forEach(item => {
+                        addHTML(item);
+
+                    });
+        }
+
+        function addHTML (item) {
+            resultDiv.innerHTML += `
+                        <div class="map_display">
+                            <img src="https://assets.ppy.sh/beatmaps/${item.mapsetID}/covers/list.jpg" alt="No Background">
+                            <a href="${item.URL}" class="link_text" target="_blank">${item.artist} - ${item.title} [${item.diff}]</a>
+                            <div class="info_box">
+                                <p class="other">Playcount: ${item.Playcount}</p>
+                                <p class="other">Curr #1: ${item.Player}</p>
+                                <p class="other">Accuracy: ${item.accuracy}%</p>
+                            </div>
+                        </div>`
+
+        }
+        
+        window.addEventListener('scroll',()=>{
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight * 0.9){
+            loadData();
+        }
+    })
+    </script>
+</body>
+</html>
