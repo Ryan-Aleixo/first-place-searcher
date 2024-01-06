@@ -182,10 +182,11 @@
         }
 
         function search() {
+            console.log("Search clicked");
             const xhr = new XMLHttpRequest();
             const inputListJSON = JSON.stringify(getFromInputs());
 
-            xhr.open('GET', `/get_data?inputList=${encodeURIComponent(inputListJSON)}`, true);
+            xhr.open('GET', `http://localhost:5000/get_data?inputList=${encodeURIComponent(inputListJSON)}`, true);
             
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -193,7 +194,6 @@
                     
                     resultDiv.innerHTML = "";
                     resultCount.innerHTML = "";
-
                     data = JSON.parse(xhr.responseText);
                     if (data.length === 0) {
                         resultDiv.innerHTML = "Your search didn't return anything"
