@@ -182,11 +182,11 @@
         }
 
         function search() {
-            console.log("Search clicked");
             const xhr = new XMLHttpRequest();
             const inputListJSON = JSON.stringify(getFromInputs());
+            console.log(inputListJSON);
 
-            xhr.open('GET', `http://localhost:5000/get_data?inputList=${encodeURIComponent(inputListJSON)}`, true);
+            xhr.open('GET', `/get_data?inputList=${inputListJSON}`, true);
             
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
