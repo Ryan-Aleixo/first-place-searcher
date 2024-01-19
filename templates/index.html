@@ -188,6 +188,11 @@
         }
 
         function search() {
+            resultDiv.innerHTML = "";
+            resultCount.innerHTML = "";
+
+            resultCount.innerHTML = "Loading...";
+
             const xhr = new XMLHttpRequest();
             const inputListJSON = JSON.stringify(getFromInputs());
             console.log(inputListJSON);
