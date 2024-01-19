@@ -98,49 +98,55 @@
     </div>
     <div class="container" id="result-container">
     <div class="display-items">
-        <div class="pp-text" id="count"></div>
-        <div id="result">
-
-        </div>
+        <div id="count"></div>
+        <div id="result"></div>
     </div>
     </div>
 
     <script>
-        let isHDToggled = false;
-        let isHRToggled = false;
-        let isDTToggled = false;
-        let isFLToggled = false;
+        let HDButtonState = 1;
+        let HRButtonState = 1;
+        let DTButtonState = 1;
+        let FLButtonState = 1;
         let resultDiv = document.getElementById('result');
         let resultCount = document.getElementById('count');
         let data;
 
         function toggleHD() {
-            isHDToggled = !isHDToggled;
-            updateButtonState('toggleHD', isHDToggled);
+            HDButtonState = HDButtonState % 3;
+            updateButtonState('toggleHD', HDButtonState);
+            HDButtonState = HDButtonState + 1;
         }
 
         function toggleHR() {
-            isHRToggled = !isHRToggled;
-            updateButtonState('toggleHR', isHRToggled);
+            HRButtonState = HRButtonState % 3;
+            updateButtonState('toggleHR', HRButtonState);
+            HRButtonState = HRButtonState + 1;
         }
 
         function toggleDT() {
-            isDTToggled = !isDTToggled;
-            updateButtonState('toggleDT', isDTToggled);
+            DTButtonState = DTButtonState % 3;
+            updateButtonState('toggleDT', DTButtonState);
+            DTButtonState = DTButtonState + 1;
         }
 
         function toggleFL() {
-            isFLToggled = !isFLToggled;
-            updateButtonState('toggleFL', isFLToggled);
+            FLButtonState = FLButtonState % 3;
+            updateButtonState('toggleFL', FLButtonState);
+            FLButtonState = FLButtonState + 1;
         }
 
-        function updateButtonState(buttonId, isToggled) {
+        function updateButtonState(buttonId, Toggle) {
             const button = document.getElementById(buttonId);
 
-            if (isToggled) {
+            if (Toggle === 1) {
+                button.classList.add('diagonal-orange-bg');
+                
+            } else if (Toggle === 2) {
+                button.classList.remove('diagonal-orange-bg');    
                 button.classList.add('orange-bg');
             } else {
-                button.classList.remove('orange-bg');
+                button.classList.remove('orange-bg');        
             }
         }
         
@@ -176,7 +182,7 @@
             const pcMax = document.getElementById('pc-max').value;
 
             const inputList = [ppMin, ppMax, arMin, arMax, odMin, odMax, csMin, csMax, srMin, srMax, 
-            lengthMin, lengthMax, comboMin, comboMax, isHDToggled, isHRToggled, isDTToggled, isFLToggled,
+            lengthMin, lengthMax, comboMin, comboMax, HDButtonState, HRButtonState, DTButtonState, FLButtonState,
             bpmMin, bpmMax, accMin, accMax, pcMin, pcMax];
             return inputList;
         }

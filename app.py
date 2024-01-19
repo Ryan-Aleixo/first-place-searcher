@@ -33,7 +33,10 @@ def get_data():
             input_list[i] = '999999999'
             if i % 2 == 0:
                 input_list[i] = '0'
-            
+        elif 14 <= i <= 17:
+            if input_list[i] != 2:
+                input_list[i] = bool(input_list[i] - 1)
+           
     print(input_list)
     
     query = f"""
@@ -47,8 +50,26 @@ def get_data():
         AND osuMaps.SR >= {input_list[8]} AND osuMaps.SR <= {input_list[9]}
         AND osuMaps.DrainTime >= {input_list[10]} AND osuMaps.DrainTime <= {input_list[11]}
         AND osuScores.max_combo >= {input_list[12]} AND osuScores.max_combo <= {input_list[13]}
-        AND osuScores.HD =  {input_list[14]} AND osuScores.HR =  {input_list[15]}
-        AND osuScores.DT =  {input_list[16]} AND osuScores.FL = {input_list[17]}
+        AND (
+            (osuScores.HD = {input_list[14]})
+            OR
+            ({input_list[14]} = 2)
+        )
+        AND (
+            (osuScores.HR = {input_list[15]})
+            OR
+            ({input_list[15]} = 2)
+        )
+        AND (
+            (osuScores.DT = {input_list[16]})
+            OR
+            ({input_list[16]} = 2)
+        )
+        AND (
+            (osuScores.FL = {input_list[17]})
+            OR
+            ({input_list[17]} = 2)
+        )
         AND osuMaps.BPM >= {input_list[18]} AND osuMaps.BPM <= {input_list[19]}
         AND osuScores.accuracy >= {input_list[20]} AND osuScores.accuracy <= {input_list[21]}
         AND CAST(osuMaps.MapsetPlaycount AS INTEGER) >= {input_list[22]} 
