@@ -7,7 +7,6 @@ body {
 }
 
 .container {
-    padding-top: 75px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +31,7 @@ body {
     background-color: rgb(57, 57, 57);
     border-radius: 8px;
     margin-bottom: 20px;
-    width: 100%; /* Adjusted width */
+    width: 100%; 
 }
 
 .display-items{ 
@@ -120,10 +119,12 @@ body {
 }
 
 #inputs-container {
-    height: 75px;
+    margin-top: 40px;
+    height: 75px;   
 }
 
 #inputs-container2 {
+    margin-top: 73px;
     height: 75px;
 }
 

@@ -12,6 +12,13 @@ CORS(app)
 def index():
     return render_template('index.html')
 
+def getPCstr(playcount):
+    s = str(playcount)
+    if len(s[:-3]) > 3:
+        if len(s[:-6]) == 1:
+            return str(float(s[:-5]) / 10) + 'm'
+        return s[:-6] + 'm'
+    return s[:-3] + 'k'
 
 @app.route('/get_data')
 def get_data():
@@ -79,7 +86,7 @@ def get_data():
     cursor.execute(query)
 
     rows = cursor.fetchall()   
-    data = [{'URL': row[2], 'Player': row[22], 'Playcount': str(row[16])[:-3] + 'k', 'mapsetID': row[18], 'accuracy': row[20],
+    data = [{'URL': row[2], 'Player': row[22], 'Playcount': getPCstr(row[16]), 'mapsetID': row[18], 'accuracy': row[20],
              'artist': row[1], 'title': row[0], 'diff': row[3], 'count': len(rows)} for row in rows] 
    
     connection.close()
