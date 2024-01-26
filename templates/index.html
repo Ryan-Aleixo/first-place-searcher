@@ -8,83 +8,93 @@
 </head>
 <body>
     <div class="container" id="inputs-container">
-        <div class="inputs-container">
+        <div class="box-container" id="box1">
             <div class="black-box">
                 <div class="pp-group">
                     <p class="pp-text">AR</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="ar-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="ar-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="ar-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="ar-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">OD</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="od-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="od-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="od-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="od-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">CS</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="cs-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="cs-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="cs-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="cs-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">SR</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="sr-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="sr-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="sr-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="sr-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>  
                 <div class="pp-group">
                     <p class="pp-text">Playcount</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="pc-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="pc-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="pc-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="pc-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div> 
-                <button class="search-button" onclick="search()">Search</button>
+                <div>
+                    <p class="pp-text">Names to avoid</p>
+                    <button onclick="addName()" class="name-buttons">Add</button>   
+                    <button onclick="removeName()" class="name-buttons">Remove</button>
+                    <div>
+                        <input type="text" id="name-adder" placeholder="Enter name">
+                    </div>
+                </div>
+                <div>
+                    <div id="names"></div>
+                </div>
             </div>
         </div>
     </div>
     <div class="container" id="inputs-container2">
-        <div class="inputs-container">
+        <div class="box-container" id="box2">
             <div class="black-box">
                 <div class="pp-group">
                     <p class="pp-text">Length</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="length-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="length-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="length-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="length-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">Combo</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="combo-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="combo-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="combo-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="combo-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">BPM</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="bpm-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="bpm-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="bpm-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="bpm-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">PP</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="pp-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="pp-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="pp-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="pp-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                 <div class="pp-group">
                     <p class="pp-text">Acc</p>
                     <div class="pp-boxes">
-                        <input type="text" class="pp-input" id="acc-min" name="myTextBox" placeholder="Min">
-                        <input type="text" class="pp-input" id="acc-max" name="myTextBox2" placeholder="Max">
+                        <input type="text" class="pp-input" id="acc-min" name="myTextBox" placeholder="Min" oninput="search()">
+                        <input type="text" class="pp-input" id="acc-max" name="myTextBox2" placeholder="Max" oninput="search()">
                     </div>
                 </div>
                     <div class="mods">
@@ -104,39 +114,46 @@
     </div>
 
     <script>
-        let HDButtonState = 1;
-        let HRButtonState = 1;
-        let DTButtonState = 1;
-        let FLButtonState = 1;
+        let HDButtonState = 0;
+        let HRButtonState = 0;
+        let DTButtonState = 0;
+        let FLButtonState = 0;
         let resultDiv = document.getElementById('result');
         let resultCount = document.getElementById('count');
         let data;
+        const idList = ["pp-min", "pp-max", "ar-min", "ar-max", "od-min", "od-max", "cs-min", "cs-max",
+        "sr-min", "sr-max", "length-min", "length-max", "combo-min", "combo-max", "bpm-min", "bpm-max", 
+        "acc-min", "acc-max", "pc-min", "pc-max"];
+        let inputList = [];
+        let name;
+        let namesList = [];
 
         function toggleHD() {
+            HDButtonState = HDButtonState + 1;
             HDButtonState = HDButtonState % 3;
             updateButtonState('toggleHD', HDButtonState);
-            HDButtonState = HDButtonState + 1;
         }
 
         function toggleHR() {
+            HRButtonState = HRButtonState + 1;
             HRButtonState = HRButtonState % 3;
             updateButtonState('toggleHR', HRButtonState);
-            HRButtonState = HRButtonState + 1;
         }
 
         function toggleDT() {
-            DTButtonState = DTButtonState % 3;
-            updateButtonState('toggleDT', DTButtonState);
             DTButtonState = DTButtonState + 1;
+            DTButtonState = DTButtonState % 3;
+            updateButtonState('toggleDT', DTButtonState); 
         }
 
         function toggleFL() {
+            FLButtonState = FLButtonState + 1;
             FLButtonState = FLButtonState % 3;
             updateButtonState('toggleFL', FLButtonState);
-            FLButtonState = FLButtonState + 1;
         }
 
         function updateButtonState(buttonId, Toggle) {
+            search();
             const button = document.getElementById(buttonId);
 
             if (Toggle === 1) {
@@ -151,40 +168,12 @@
         }
         
         function getFromInputs() {
-            const ppMin = document.getElementById('pp-min').value;
-            const ppMax = document.getElementById('pp-max').value;
+            inputList = [];
 
-            const arMin = document.getElementById('ar-min').value;
-            const arMax = document.getElementById('ar-max').value;
-
-            const odMin = document.getElementById('od-min').value;
-            const odMax = document.getElementById('od-max').value;
-
-            const csMin = document.getElementById('cs-min').value;
-            const csMax = document.getElementById('cs-max').value;
-
-            const srMin = document.getElementById('sr-min').value;
-            const srMax = document.getElementById('sr-max').value;
-
-            const lengthMin = document.getElementById('length-min').value;
-            const lengthMax = document.getElementById('length-max').value;
-
-            const comboMin = document.getElementById('combo-min').value;
-            const comboMax = document.getElementById('combo-max').value;
-
-            const bpmMin = document.getElementById('bpm-min').value;
-            const bpmMax = document.getElementById('bpm-max').value;
-
-            const accMin = document.getElementById('acc-min').value;
-            const accMax = document.getElementById('acc-max').value;
-
-            const pcMin = document.getElementById('pc-min').value;
-            const pcMax = document.getElementById('pc-max').value;
-
-            const inputList = [ppMin, ppMax, arMin, arMax, odMin, odMax, csMin, csMax, srMin, srMax, 
-            lengthMin, lengthMax, comboMin, comboMax, HDButtonState, HRButtonState, DTButtonState, FLButtonState,
-            bpmMin, bpmMax, accMin, accMax, pcMin, pcMax];
-            return inputList;
+            for (let i = 0; i < idList.length; i++){
+                inputList.push(document.getElementById(idList[i]).value);
+            }
+            return inputList.concat([HDButtonState, HRButtonState, DTButtonState, FLButtonState, namesList]);
         }
 
         function search() {
@@ -208,14 +197,14 @@
                     data = JSON.parse(xhr.responseText);
                     if (data.length === 0) {
                         resultDiv.innerHTML = "Your search didn't return anything"
-                    } else {
-                        resultCount.innerText = "Results: " + data[0].count;
-                        const firstItems = data.slice(0, 5);
-                        data.splice(0, 5);
-                        firstItems.forEach(item => {
-                            addHTML(item);
-                    });
+                        return;
                     }
+                    resultCount.innerText = "Results: " + data[0].count;
+                    const firstItems = data.slice(0, 5);
+                    data.splice(0, 5);
+                    firstItems.forEach(item => {
+                        addHTML(item);
+                    });
                 }
             };
             xhr.send();
@@ -227,7 +216,6 @@
             data.splice(0, 5);
             items.forEach(item => {
                         addHTML(item);
-
                     });
         }
 
@@ -240,6 +228,7 @@
                                 <p class="other">Playcount: ${item.Playcount}</p>
                                 <p class="other">Curr #1: ${item.Player}</p>
                                 <p class="other">Accuracy: ${item.accuracy}%</p>
+                                <p class="other">Year Ranked: ${item.year}</p>
                             </div>
                         </div>`
 
@@ -250,6 +239,46 @@
             loadData();
         }
     })
+    function addName (){
+        name = document.getElementById('name-adder').value;
+        if (name === ""){
+            return;
+        }
+        if (name.length > 15){
+            alert("name too long");
+            return;
+        }
+        if (namesList.includes(name)){
+            alert("name already included");
+            return;
+        }
+        if (namesList.length > 4){
+            alert("too many names");
+            return;
+        }
+        t = `
+            <div class="name-text" id="${name}">
+                <tr>
+                    ${name}
+                </tr>
+            </div>
+            `
+            document.getElementById('names').innerHTML += t;
+            namesList.push(name);
+            document.getElementById('name-adder').value = '';
+            search();
+        }
+
+    function removeName (){
+        if (namesList.length <= 0){
+            return;
+        }
+        console.log(namesList[namesList.length - 1]);   
+        document.getElementById(namesList[namesList.length - 1]).remove();
+        namesList = namesList.slice(0, namesList.length - 1);
+        search();
+    }
+    
     </script>
 </body>
 </html>

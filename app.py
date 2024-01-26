@@ -25,9 +25,8 @@ def get_data():
     input_list_json = request.args.get('inputList')
 
     if input_list_json is None:
-        return jsonify({"error": "Input list parameter is missing"}), 400  # Return a 400 Bad Request status
+        return jsonify({"error": "Input list parameter is missing"}), 400 
 
-    # Convert the JSON string back to a Python list
     input_list = json.loads(input_list_json)
     
     
@@ -40,9 +39,13 @@ def get_data():
             input_list[i] = '999999999'
             if i % 2 == 0:
                 input_list[i] = '0'
-        elif 14 <= i <= 17:
-            if input_list[i] != 2:
-                input_list[i] = bool(input_list[i] - 1)
+        # why am I so retarded
+        elif 20 <= i <= 23:
+            if input_list[i] == 2:
+                input_list[i] = 1
+            elif input_list[i] == 1:
+                input_list[i] = 2
+            
            
     print(input_list)
     
@@ -57,37 +60,38 @@ def get_data():
         AND osuMaps.SR >= {input_list[8]} AND osuMaps.SR <= {input_list[9]}
         AND osuMaps.DrainTime >= {input_list[10]} AND osuMaps.DrainTime <= {input_list[11]}
         AND osuScores.max_combo >= {input_list[12]} AND osuScores.max_combo <= {input_list[13]}
+        AND osuMaps.BPM >= {input_list[14]} AND osuMaps.BPM <= {input_list[15]}
+        AND osuScores.accuracy >= {input_list[16]} AND osuScores.accuracy <= {input_list[17]}
+        AND CAST(osuMaps.MapsetPlaycount AS INTEGER) >= {input_list[18]} 
+        AND CAST(osuMaps.MapsetPlaycount AS INTEGER) <= {input_list[19]}
         AND (
-            (osuScores.HD = {input_list[14]})
+            (osuScores.HD = {input_list[20]})
             OR
-            ({input_list[14]} = 2)
+            ({input_list[20]} = 2)
         )
         AND (
-            (osuScores.HR = {input_list[15]})
+            (osuScores.HR = {input_list[21]})
             OR
-            ({input_list[15]} = 2)
+            ({input_list[21]} = 2)
         )
         AND (
-            (osuScores.DT = {input_list[16]})
+            (osuScores.DT = {input_list[22]})
             OR
-            ({input_list[16]} = 2)
+            ({input_list[22]} = 2)
         )
         AND (
-            (osuScores.FL = {input_list[17]})
+            (osuScores.FL = {input_list[23]})
             OR
-            ({input_list[17]} = 2)
+            ({input_list[23]} = 2)
         )
-        AND osuMaps.BPM >= {input_list[18]} AND osuMaps.BPM <= {input_list[19]}
-        AND osuScores.accuracy >= {input_list[20]} AND osuScores.accuracy <= {input_list[21]}
-        AND CAST(osuMaps.MapsetPlaycount AS INTEGER) >= {input_list[22]} 
-        AND CAST(osuMaps.MapsetPlaycount AS INTEGER) <= {input_list[23]}
+
         ORDER BY DateRanked DESC;
     """
     cursor.execute(query)
 
     rows = cursor.fetchall()   
     data = [{'URL': row[2], 'Player': row[22], 'Playcount': getPCstr(row[16]), 'mapsetID': row[18], 'accuracy': row[20],
-             'artist': row[1], 'title': row[0], 'diff': row[3], 'count': len(rows)} for row in rows] 
+             'artist': row[1], 'title': row[0], 'diff': row[3], 'count': len(rows), 'year': row[15].split("-")[0]} for row in rows] 
    
     connection.close()
 
