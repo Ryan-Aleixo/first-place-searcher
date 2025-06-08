@@ -13,43 +13,36 @@ let name;
 let namesList = [];
 
 function toggleHD() {
-    HDButtonState = HDButtonState + 1;
-    HDButtonState = HDButtonState % 3;
+    HDButtonState = (HDButtonState + 1) % 2;
     updateButtonState('toggleHD', HDButtonState);
 }
 
 function toggleHR() {
-    HRButtonState = HRButtonState + 1;
-    HRButtonState = HRButtonState % 3;
+    HRButtonState = (HRButtonState + 1) % 2;
     updateButtonState('toggleHR', HRButtonState);
 }
 
 function toggleDT() {
-    DTButtonState = DTButtonState + 1;
-    DTButtonState = DTButtonState % 3;
+    DTButtonState = (DTButtonState + 1) % 2;
     updateButtonState('toggleDT', DTButtonState);
 }
 
 function toggleFL() {
-    FLButtonState = FLButtonState + 1;
-    FLButtonState = FLButtonState % 3;
+    FLButtonState = (FLButtonState + 1) % 2;
     updateButtonState('toggleFL', FLButtonState);
 }
 
 function updateButtonState(buttonId, Toggle) {
-    search();
     const button = document.getElementById(buttonId);
-
     if (Toggle === 1) {
-        button.classList.add('diagonal-orange-bg');
-
-    } else if (Toggle === 2) {
-        button.classList.remove('diagonal-orange-bg');
         button.classList.add('orange-bg');
     } else {
         button.classList.remove('orange-bg');
     }
+
+    search();
 }
+
 
 function getFromInputs() {
     inputList = [];
@@ -112,45 +105,6 @@ window.addEventListener('scroll', () => {
         loadData();
     }
 })
-function addName() {
-    name = document.getElementById('name-adder').value;
-    if (name === "") {
-        return;
-    }
-    if (name.length > 15) {
-        alert("name too long");
-        return;
-    }
-    if (namesList.includes(name)) {
-        alert("name already included");
-        return;
-    }
-    if (namesList.length > 4) {
-        alert("too many names");
-        return;
-    }
-    t = `
-            <div class="name-text" id="${name}">
-                <tr>
-                    ${name}
-                </tr>
-            </div>
-            `
-    document.getElementById('names').innerHTML += t;
-    namesList.push(name);
-    document.getElementById('name-adder').value = '';
-    search();
-}
-
-function removeName() {
-    if (namesList.length <= 0) {
-        return;
-    }
-    console.log(namesList[namesList.length - 1]);
-    document.getElementById(namesList[namesList.length - 1]).remove();
-    namesList = namesList.slice(0, namesList.length - 1);
-    search();
-}
 
 function loadData() {
     resultDiv = document.getElementById('result');

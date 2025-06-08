@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 import json
 import sqlite3
+import random   
 
 app = Flask(__name__)
 
@@ -29,13 +30,6 @@ def search():
             input_list[i] = '999999999'
             if i % 2 == 0:
                 input_list[i] = '0'
-        # why am I so retarded
-        elif 20 <= i <= 23:
-            if input_list[i] == 2:
-                input_list[i] = 1
-            elif input_list[i] == 1:
-                input_list[i] = 2
-
         # idk just whatever
         if input_list[16] == "":
             input_list[16] = 0
@@ -62,26 +56,12 @@ def search():
         AND (osuScores.accuracy >= {input_list[16]} AND osuScores.accuracy <= {input_list[17]})
         AND CAST(osuMaps.MapsetPlaycount AS INTEGER) >= {input_list[18]} 
         AND CAST(osuMaps.MapsetPlaycount AS INTEGER) <= {input_list[19]}
-        AND (
-            (osuScores.HD = {input_list[20]})
-            OR
-            ({input_list[20]} = 2)
-        )
-        AND (
-            (osuScores.HR = {input_list[21]})
-            OR
-            ({input_list[21]} = 2)
-        )
-        AND (
-            (osuScores.DT = {input_list[22]})
-            OR
-            ({input_list[22]} = 2)
-        )
-        AND (
-            (osuScores.FL = {input_list[23]})
-            OR
-            ({input_list[23]} = 2)
-        )
+        AND (osuScores.HD = {input_list[20]})
+        AND (osuScores.HR = {input_list[21]})
+        AND (osuScores.DT = {input_list[22]})
+        AND (osuScores.FL = {input_list[23]})
+
+
         ORDER BY DateRanked DESC;
     """
 
@@ -91,8 +71,10 @@ def search():
     column_names = [desc[0] for desc in cursor.description]
     results = [dict(zip(column_names, row)) for row in rows]
 
+    random.shuffle(results)
+
     connection.close()
-    # print(results[:10])
+    print(results[0])
     return jsonify(results)
 
 
