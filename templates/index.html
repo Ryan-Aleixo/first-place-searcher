@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>osu #1 searcher</title>
+</head>
+
+<body>
+    <div class="container" id="inputs-container">
+        <div class="box-container" id="box1">
+            <div class="black-box">
+                <div class="pp-group">
+                    <p class="pp-text">AR</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="ar-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="ar-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">OD</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="od-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="od-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">CS</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="cs-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="cs-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">SR</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="sr-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="sr-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">Playcount</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="pc-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="pc-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div>
+                    <p class="pp-text">Names to avoid</p>
+                    <button onclick="addName()" class="name-buttons">Add</button>
+                    <button onclick="removeName()" class="name-buttons">Remove</button>
+                    <div>
+                        <input type="text" id="name-adder" placeholder="Enter name">
+                    </div>
+                </div>
+                <div>
+                    <div id="names"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="inputs-container2">
+        <div class="box-container" id="box2">
+            <div class="black-box">
+                <div class="pp-group">
+                    <p class="pp-text">Length</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="length-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="length-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">Combo</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="combo-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="combo-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">BPM</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="bpm-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="bpm-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">PP</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="pp-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="pp-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="pp-group">
+                    <p class="pp-text">Acc</p>
+                    <div class="pp-boxes">
+                        <input type="text" class="pp-input" id="acc-min" name="myTextBox" placeholder="Min"
+                            oninput="search()">
+                        <input type="text" class="pp-input" id="acc-max" name="myTextBox2" placeholder="Max"
+                            oninput="search()">
+                    </div>
+                </div>
+                <div class="mods">
+                    <button class="mod-buttons" id="toggleHD" onclick="toggleHD()">HD</button>
+                    <button class="mod-buttons" id="toggleHR" onclick="toggleHR()">HR</button>
+                    <button class="mod-buttons" id="toggleDT" onclick="toggleDT()">DT</button>
+                    <button class="mod-buttons" id="toggleFL" onclick="toggleFL()">FL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="result-container">
+        <div class="display-items">
+            <div id="count"></div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="../static/scripts.js"></script>
+</body>
+
+</html>
